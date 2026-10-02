@@ -1,17 +1,19 @@
+import Link from "next/link";
+
 const links = ["About", "Rules", "Rewards", "FAQ"];
 
 export default function Navbar() {
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Main navigation">
-        <a className="wordmark" href="#top" aria-label="Hacktoberfest home">HACKTOBERFEST</a>
+        <Link className="wordmark" href="/" aria-label="Hacktoberfest home">HACKTOBERFEST</Link>
         <div className="nav-right">
           <ul className="nav-links">
             {links.map((link) => (
-              <li key={link}><a href={`#${link.toLowerCase()}`}>{link}</a></li>
+              <li key={link}><Link href={link === "About" ? "/about" : `/#${link.toLowerCase()}`}>{link}</Link></li>
             ))}
           </ul>
-          <a className="button button-primary nav-join" href="#about">Join Now</a>
+          <a className="button button-primary nav-join" href="/about#contribute">Join Now</a>
         </div>
       </nav>
     </header>

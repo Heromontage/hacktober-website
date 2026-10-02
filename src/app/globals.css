@@ -24,8 +24,27 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 .nav-right, .nav-links { display: flex; align-items: center; }
 .nav-right { gap: 42px; }
 .nav-links { list-style: none; padding: 0; margin: 0; gap: 38px; }
-.nav-links a { color: var(--cream); font-size: 26px; font-weight: 600; }
-.nav-links a:focus-visible { color: var(--amber); }
+.nav-links a {
+  display: inline-block;
+  color: transparent;
+  background-image: linear-gradient(to top, var(--amber) 50%, var(--cream) 50%);
+  background-size: 100% 200%;
+  background-position: center top;
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-size: 26px;
+  font-weight: 600;
+  transition: background-position .3s ease;
+}
+.nav-links a:hover, .nav-links a:active, .nav-links a:focus-visible {
+  background-position: center bottom;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a { transition: none; }
+}
+@media (forced-colors: active) {
+  .nav-links a { color: LinkText; background-image: none; }
+}
 .button { display: inline-flex; justify-content: center; align-items: center; min-height: 72px; border-radius: 9px; padding: 0 20px; font-family: var(--font-inter), sans-serif; font-size: 27px; font-weight: 600; white-space: nowrap; transition: transform .15s ease, background-color .15s ease; }
 .button-primary { background: var(--amber); color: var(--forest); }
 .button:active {transform: scale(0.97);}
@@ -192,6 +211,19 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
   align-items: center;
 }
 
+.footer-branding {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.footer-organizer {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .footer-brand {
   font: 14px var(--font-minecraft), monospace;
   letter-spacing: 1px;
@@ -327,3 +359,57 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
     font-size: 11px;
   }
 }
+
+/* About page */
+.about-page { background: var(--forest-deep); color: var(--maroon); min-height: 100dvh; }
+.about-inner { max-width: 1120px; margin: 0 auto; position: relative; }
+.about-intro, .about-support { background: var(--cream); padding: 28px 28px 26px; }
+.about-tag { display: inline-block; border: 2px solid var(--maroon); background: var(--cream); color: var(--maroon); padding: 2px 8px; font-size: 12px; line-height: 1.2; font-weight: 500; }
+.about-sky { background: var(--sky); }
+.about-salmon { background: var(--salmon); }
+.about-amber { background: var(--amber); }
+.about-cream { background: var(--cream); }
+.about-date { position: absolute; top: -14px; right: 8px; transform: rotate(6deg); border: 3px solid var(--maroon); background: var(--salmon); padding: 5px 10px; font-size: 12px; font-weight: 700; }
+.about-title { color: var(--forest); font: 36px/1.35 var(--font-minecraft), monospace; letter-spacing: 5px; margin: 18px 0 12px; }
+.about-title span { display: inline-block; background: var(--amber); border: 3px solid var(--maroon); padding: 0 12px; transform: rotate(-1.5deg); }
+.about-lede { max-width: 480px; font-size: 14px; line-height: 1.55; margin: 0 0 28px; }
+.about-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.about-card { background: var(--cream); border: 3px solid var(--maroon); box-shadow: 6px 6px 0 var(--maroon); padding: 18px 16px; min-width: 0; }
+.about-card.about-sky { background: var(--sky); }
+.about-card.about-amber { background: var(--amber); }
+.about-card.about-salmon { background: var(--salmon); }
+
+.about-card h2, .about-card h3, .about-steps-title { font: 12px/1.5 var(--font-minecraft), monospace; letter-spacing: 1.5px; margin: 0 0 7px; }
+.about-card p { font-size: 13px; line-height: 1.5; margin: 0; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.about-repo { background: var(--forest); border-block: 3px solid var(--maroon); padding: 26px 28px; }
+.about-section-title { font: 23px/1.4 var(--font-minecraft), monospace; letter-spacing: 3px; margin: 16px 0; color: var(--cream); }
+.about-repository { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
+.about-repository p { max-width: 450px; }
+.about-action { display: inline-flex; align-items: center; justify-content: center; gap: 3px; background: var(--amber); color: var(--maroon); border: 3px solid var(--maroon); padding: 6px 12px; white-space: nowrap; font-size: 12px; font-weight: 700; }
+.about-action { transition: transform .15s ease, background-color .15s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .about-action:hover { background: #ffd065; transform: translateY(-2px); }
+}
+.about-action:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .about-action { transition: none; }
+}
+.about-page a:focus-visible { outline: 3px solid var(--maroon); outline-offset: 4px; }
+.about-tree { font: 12px/1.65 monospace; margin: 0; white-space: pre-wrap; }
+.about-labels { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; font-size: 12px; }
+.about-labels a:hover { text-decoration: underline; }
+.about-steps-title { color: var(--cream); margin: 22px 0 12px; scroll-margin-top: 20px; }
+.about-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; }
+.about-steps .about-card { padding: 14px 12px; }
+.about-number { font: 17px/1.4 var(--font-minecraft), monospace; letter-spacing: 2px; }
+.about-steps h4 { font-size: 13px; margin: 3px 0; }
+.about-steps p { font-size: 11px; line-height: 1.4; }
+.about-support { padding-top: 24px; }
+.about-bullets { list-style-type: square; padding-left: 12px; margin: 6px 0 0; font-size: 13px; line-height: 1.75; }
+.about-cta { text-align: center; padding: 22px 0 2px; }
+.about-cta h2 { color: var(--forest); margin: 12px 0 14px; }
+.about-start { padding: 10px 20px; font-size: 14px; box-shadow: 6px 6px 0 var(--maroon); }
+
+@media (min-width: 1000px) { .about-intro, .about-repo, .about-support { padding: 40px 32px; } .about-title { font-size: 48px; } .about-lede { max-width: 650px; font-size: 17px; } .about-card { padding: 24px; } .about-card p, .about-bullets { font-size: 15px; } .about-steps p { font-size: 14px; } }
+@media (max-width: 600px) { .about-intro, .about-repo, .about-support { padding: 24px 20px; } .about-pair { grid-template-columns: 1fr; gap: 20px; } .about-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .about-repository { flex-direction: column; gap: 14px; } .about-title { font-size: 30px; letter-spacing: 3px; margin-top: 26px; } .about-date { right: 0; top: -8px; font-size: 10px; } .about-section-title { font-size: 20px; letter-spacing: 2px; }  }

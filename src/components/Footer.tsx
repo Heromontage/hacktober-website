@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="site-footer">
@@ -11,14 +13,17 @@ export default function Footer() {
       </div>
 
       <div className="footer-content">
-        <span className="footer-brand">HACKTOBERFEST</span>
+        <div className="footer-branding">
+          <span className="footer-brand">HACKTOBERFEST</span>
+          <span className="footer-organizer">Google Developer Groups IIT Mandi</span>
+        </div>
 
         <nav className="footer-links">
-          <a href="#about">About</a>
+          <Link href="/about">About</Link>
           <span>·</span>
-          <a href="#rules">Rules</a>
+          <Link href="/about#rules">Rules</Link>
           <span>·</span>
-          <a href="#faq">FAQ</a>
+          <Link href="/#faq">FAQ</Link>
         </nav>
 
         <span className="footer-copyright">© 2026</span>
