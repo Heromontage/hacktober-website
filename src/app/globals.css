@@ -45,14 +45,14 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 .staircase { flex: none; background: transparent; height: 24.074dvh; display: grid; grid-template-rows: 11% repeat(4, 22.25%); }
 .staircase-row { height: 100%; display: flex; }
 .staircase-fill { flex: none; height: 100%; position: relative; }
-.staircase-empty { flex: 1; height: 100%; background-color: var(--cream); background-image: url("/paper-noise.png"), url("/paper-noise.png"); background-repeat: repeat; }
+.staircase-empty { flex: 1; height: 100%; background-color: var(--cream);  background-repeat: repeat; }
 .staircase-accent { position: absolute; top: 0; right: 0; height: 100%; width: 7.29vw; }
 .staircase-accent-amber { background: var(--amber); }
 .staircase-row:first-child .staircase-accent { width: 5.47vw; }
 .staircase-accent-salmon { background: var(--salmon); }
 .staircase-accent-sky { background: var(--sky); }
 .staircase-accent-maroon { background: var(--maroon); }
-.stats { flex: none; height: 15.741dvh; background-color: var(--cream); background-image: url("/paper-noise.png"), url("/paper-noise.png"); background-repeat: repeat; }
+.stats { flex: none; height: 15.741dvh; background-color: var(--cream);  background-repeat: repeat; }
 .stats-inner { max-width: 1920px; height: 100%; margin: auto; padding: 2.22dvh 32px 3.15dvh; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; text-align: center; }
 .stat { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 31px; line-height: 1.22; }
 .stat strong { font: 35px/1 var(--font-minecraft), monospace; }
