@@ -25,12 +25,19 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 .nav-right { gap: 42px; }
 .nav-links { list-style: none; padding: 0; margin: 0; gap: 38px; }
 .nav-links a { color: var(--cream); font-size: 26px; font-weight: 600; }
-.nav-links a:hover, .nav-links a:focus-visible { color: var(--amber); }
+.nav-links a:focus-visible { color: var(--amber); }
 .button { display: inline-flex; justify-content: center; align-items: center; min-height: 72px; border-radius: 9px; padding: 0 20px; font-family: var(--font-inter), sans-serif; font-size: 27px; font-weight: 600; white-space: nowrap; transition: transform .15s ease, background-color .15s ease; }
-.button:hover { transform: translateY(-2px); }
-.button:focus-visible, .wordmark:focus-visible, .nav-links a:focus-visible { outline: 3px solid var(--sky); outline-offset: 4px; }
 .button-primary { background: var(--amber); color: var(--forest); }
-.button-primary:hover { background: #ffd065; }
+.button:active {transform: scale(0.97);}
+
+@media (hover:hover) and (pointer: fine) {
+  .button:focus-visible, .wordmark:focus-visible, .nav-links a:focus-visible { outline: 3px solid var(--sky); outline-offset: 4px; }
+  .button:hover { transform: translateY(-2px); }
+  .button-outline:hover { background: rgb(229 230 217 / 12%); }
+  .button-primary:hover { background: #ffd065; }
+}
+
+
 .nav-join { min-width: 216px; min-height: 64px; }
 .hero { flex: 1; min-height: 0; display: flex; position: relative; text-align: center; }
 .hero-content { position: relative; z-index: 1; width: 100%; max-width: 1920px; margin: auto; padding: 0 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(2.6dvh); }
@@ -41,7 +48,7 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 .hero-actions { display: flex; justify-content: center; gap: 60px; margin-top: 3.52dvh; }
 .hero-actions .button { min-width: clamp(220px, 18.75vw, 360px); min-height: clamp(48px, 3.75vw, 72px); font-size: clamp(17px, 1.41vw, 27px); text-transform: uppercase; }
 .button-outline { border: 5px solid var(--cream); background: rgb(28 58 51 / 35%); color: var(--cream); }
-.button-outline:hover { background: rgb(229 230 217 / 12%); }
+
 .staircase { flex: none; background: transparent; height: 24.074dvh; display: grid; grid-template-rows: 11% repeat(4, 22.25%); }
 .staircase-row { height: 100%; display: flex; }
 .staircase-fill { flex: none; height: 100%; position: relative; }
