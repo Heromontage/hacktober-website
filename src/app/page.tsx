@@ -1,6 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import GradientWaves from "@/components/GradientWaves";
+import HowItWorks from "@/components/HowItWorks";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -27,6 +29,8 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <HowItWorks />
+        <Footer />
       </main>
     </div>
   );
