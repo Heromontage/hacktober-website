@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const links = ["About", "Rules", "Rewards", "FAQ"];
+const links = ["About", "Rules", "Rewards","Leaderboard", "FAQ"];
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -17,14 +17,17 @@ export default function Navbar() {
                 <Link
                   className={
                     (link === "About" && pathname === "/about") ||
-                    (link === "Rules" && pathname === "/rules") ? "active" : ""
+                    (link === "Rules" && pathname === "/rules") ||
+                    (link === "Leaderboard" && pathname === "/leaderboard") ? "active" : ""
                   }
                   href={
                     link === "About"
                       ? "/about"
                       : link === "Rules"
                         ? "/rules"
-                        : `/#${link.toLowerCase()}`
+                        : link === "Leaderboard"
+                          ? "/leaderboard"
+                          : `/#${link.toLowerCase()}`
                   }
                 >
                   {link}
