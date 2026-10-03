@@ -22,8 +22,8 @@ export default function Hero() {
           <h1 id="hero-title">HACKTOBER FEST</h1>
           <p>Open source. Open minds. Ship your first pull request this October.</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#about">Start contributing</a>
-            <a className="button button-outline" href="#rules">View rules</a>
+            <a className="button button-primary" href="/about">Start contributing</a>
+            <a className="button button-outline" href="/rules">View rules</a>
           </div>
         </div>
       </section>

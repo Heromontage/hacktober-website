@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="site-footer">
+    <footer id = "Footer" className="site-footer">
       <div className="footer-stripe">
         <span className="footer-stripe-forest" />
         <span className="footer-stripe-maroon" />

@@ -13,7 +13,7 @@ export default function Navbar() {
               <li key={link}><Link href={link === "About" ? "/about" : link === "Rules" ? "/rules" : `/#${link.toLowerCase()}`}>{link}</Link></li>
             ))}
           </ul>
-          <a className="button button-primary nav-join" href="/about#contribute">Join Now</a>
+          <a className="button button-primary nav-join" href="#Footer">Join Now</a>
         </div>
       </nav>
     </header>

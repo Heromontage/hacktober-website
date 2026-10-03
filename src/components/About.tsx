@@ -65,7 +65,7 @@ export default function About() {
               </article>
               <article className="about-card">
                 <h3>ISSUE LABELS</h3>
-                <ul className="about-labels">{labels.map(label => <li key={label.name}><a className={`about-tag about-${label.color}`} href={`${repository}/issues?q=${encodeURIComponent(`is:issue is:open label:"${label.name}"`)}`} target="_blank" rel="noreferrer">{label.name}</a> <span>{label.text}</span></li>)}</ul>
+                <ul className="about-labels">{labels.map(label => <li key={label.name}><span className={`about-tag about-${label.color}`}>{label.name}</span> <span>{label.text}</span></li>)}</ul>
               </article>
             </div>
             <h3 className="about-steps-title" id="contribute">HOW TO CONTRIBUTE</h3>
@@ -79,7 +79,8 @@ export default function About() {
               <article className="about-card about-salmon" id="rules"><h2>GROUND RULES</h2><ul className="about-bullets"><li>One issue, one PR</li><li>Be kind in reviews</li><li>No spam or empty PRs</li><li>Follow the repository’s contribution guidelines</li></ul></article>
               <article className="about-card about-sky"><h2>NEED HELP?</h2><ul className="about-bullets"><li>Ask in the GDG IIT Mandi community chat</li><li>Tag a maintainer on your PR</li><li>Join the weekend help sessions</li></ul></article>
             </div>
-            <div className="about-cta"><h2 className="about-section-title">READY TO HACK?</h2><a className="about-action about-start" href={`${repository}/issues`} target="_blank" rel="noreferrer">Start contributing <ArrowRight size={18} aria-hidden="true" /></a></div>
+            <div className="about-cta"><h2 className="about-section-title">READY TO HACK?</h2>
+              <a className="about-action about-start" href={`${repository}/issues`} target="_blank" rel="noreferrer">Start contributing <ArrowRight size={18} aria-hidden="true" /></a></div>
           </div>
         </section>
       </main>
