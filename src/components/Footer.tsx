@@ -21,7 +21,7 @@ export default function Footer() {
         <nav className="footer-links">
           <Link href="/about">About</Link>
           <span>·</span>
-          <Link href="/about#rules">Rules</Link>
+          <Link href="/rules">Rules</Link>
           <span>·</span>
           <Link href="/#faq">FAQ</Link>
         </nav>

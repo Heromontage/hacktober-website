@@ -10,7 +10,7 @@ export default function Navbar() {
         <div className="nav-right">
           <ul className="nav-links">
             {links.map((link) => (
-              <li key={link}><Link href={link === "About" ? "/about" : `/#${link.toLowerCase()}`}>{link}</Link></li>
+              <li key={link}><Link href={link === "About" ? "/about" : link === "Rules" ? "/rules" : `/#${link.toLowerCase()}`}>{link}</Link></li>
             ))}
           </ul>
           <a className="button button-primary nav-join" href="/about#contribute">Join Now</a>
