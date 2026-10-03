@@ -1,8 +1,11 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = ["About", "Rules", "Rewards", "FAQ"];
 
 export default function Navbar() {
+  const pathname = usePathname();
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Main navigation">
@@ -10,7 +13,23 @@ export default function Navbar() {
         <div className="nav-right">
           <ul className="nav-links">
             {links.map((link) => (
-              <li key={link}><Link href={link === "About" ? "/about" : link === "Rules" ? "/rules" : `/#${link.toLowerCase()}`}>{link}</Link></li>
+              <li key={link}>
+                <Link
+                  className={
+                    (link === "About" && pathname === "/about") ||
+                    (link === "Rules" && pathname === "/rules") ? "active" : ""
+                  }
+                  href={
+                    link === "About"
+                      ? "/about"
+                      : link === "Rules"
+                        ? "/rules"
+                        : `/#${link.toLowerCase()}`
+                  }
+                >
+                  {link}
+                </Link>
+              </li>
             ))}
           </ul>
           <a className="button button-primary nav-join" href="#Footer">Join Now</a>

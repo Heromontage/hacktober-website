@@ -36,6 +36,9 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
   font-weight: 600;
   transition: background-position .3s ease;
 }
+.nav-links a.active {
+  background-position: center bottom;
+}
 .nav-links a:hover, .nav-links a:active, .nav-links a:focus-visible {
   background-position: center bottom;
 }
