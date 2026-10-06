@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const passport = require('passport');
+const bootstrapRoutes = require('./routes/bootstrap.routes');
 require('./config/passport');
 
 const app = express();
@@ -63,7 +64,9 @@ app.use('/admin', require('./routes/admin.routes'));
 app.use('/repositories', require('./routes/repository.routes'));
 app.use('/contributions', require('./routes/contribution.routes'));
 app.use('/webhooks', require('./routes/contribution.routes').webhookRouter);
+app.use('/bootstrap', bootstrapRoutes);
 app.use('/', require('./routes/contribution.routes').publicRouter);
+
 
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 app.use((err, req, res, next) => {
