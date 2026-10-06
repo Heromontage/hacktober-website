@@ -1,20 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const contributors = [
-  { rank: 1, username: "alexdev", prs: 28, points: 280, color: "amber" },
-  { rank: 2, username: "codepanda", prs: 24, points: 240, color: "sky" },
-  { rank: 3, username: "devsneh", prs: 21, points: 210, color: "salmon" },
-  { rank: 4, username: "sahaj", prs: 18, points: 180 },
-  { rank: 5, username: "neha_codes", prs: 16, points: 160 },
-  { rank: 6, username: "aryanbuilds", prs: 14, points: 140 },
-  { rank: 7, username: "priyadev", prs: 13, points: 130 },
-  { rank: 8, username: "rishabkmr", prs: 11, points: 110 },
-  { rank: 9, username: "tanmayy", prs: 9, points: 90 },
-  { rank: 10, username: "ishaopen", prs: 8, points: 80 },
-];
+import {
+  getLeaderboard,
+  getMyRank,
+  type LeaderboardUser,
+} from "@/lib/api";
 
 export default function Leaderboard() {
+  const [contributors, setContributors] = useState<LeaderboardUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const [myRank, setMyRank] = useState<{
+    rank: number | null;
+    username?: string;
+    totalScore?: number;
+    prCount?: number;
+  } | null>(null);
+
+  useEffect(() => {
+    getLeaderboard()
+      .then((data) => setContributors(data.users))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+
+    getMyRank()
+      .then(setMyRank)
+      .catch(() => setMyRank(null));
+  }, []);
+
   return (
     <div className="leaderboard-page">
       <Navbar />
@@ -60,20 +77,48 @@ export default function Leaderboard() {
                   <span>POINTS</span>
                 </div>
 
-                {contributors.map((contributor) => (
+                {loading && (
+                  <div className="leaderboard-row">
+                    <span />
+                    <span>Loading...</span>
+                    <span />
+                    <span />
+                  </div>
+                )}
+
+                {error && !loading && (
+                  <div className="leaderboard-row">
+                    <span />
+                    <span>{error}</span>
+                    <span />
+                    <span />
+                  </div>
+                )}
+
+                {!loading &&
+                !error &&
+                contributors.map((contributor) => (
                   <div
                     className={`leaderboard-row ${
-                      contributor.rank <= 3
-                        ? `leaderboard-rank-${contributor.color}`
-                        : ""
+                      contributor.rank === 1
+                      ? "leaderboard-rank-amber"
+                      : contributor.rank === 2
+                        ? "leaderboard-rank-sky"
+                        : contributor.rank === 3
+                          ? "leaderboard-rank-salmon"
+                          : ""
                     }`}
                     key={contributor.username}
                   >
                     <span
                       className={`leaderboard-rank ${
-                        contributor.rank <= 3
-                          ? `leaderboard-rank-badge leaderboard-rank-badge-${contributor.color}`
-                          : ""
+                        contributor.rank === 1
+                        ? "leaderboard-rank-badge leaderboard-rank-badge-amber"
+                        : contributor.rank === 2
+                          ? "leaderboard-rank-badge leaderboard-rank-badge-sky"
+                          : contributor.rank === 3
+                            ? "leaderboard-rank-badge leaderboard-rank-badge-salmon"
+                            : ""
                       }`}
                     >
                       {contributor.rank}
@@ -86,16 +131,20 @@ export default function Leaderboard() {
                       <strong>{contributor.username}</strong>
                     </span>
 
-                    <span>{contributor.prs}</span>
+                    <span>{contributor.prCount}</span>
 
                     <strong
                       className={
-                        contributor.rank <= 3
-                          ? `leaderboard-points-${contributor.color}`
-                          : ""
+                        contributor.rank === 1
+                        ? "leaderboard-points-amber"
+                        : contributor.rank === 2
+                          ? "leaderboard-points-sky"
+                          : contributor.rank === 3
+                            ? "leaderboard-points-salmon"
+                            : ""
                       }
                     >
-                      {contributor.points}
+                      {contributor.totalScore}
                     </strong>
                   </div>
                 ))}
@@ -109,26 +158,28 @@ export default function Leaderboard() {
               </h2>
 
               <div className="leaderboard-rank-card">
-                <div className="leaderboard-big-rank">#42</div>
+                <div className="leaderboard-big-rank">
+                  {myRank?.rank ? `#${myRank.rank}` : "—"}
+                </div>
 
                 <div className="leaderboard-profile">
                   <span className="leaderboard-avatar leaderboard-avatar-profile">
-                    S
+                    {myRank?.username?.charAt(0).toUpperCase() ?? "?"}
                   </span>
 
                   <div>
-                    <strong>sahajsinghal</strong>
+                    <strong>{myRank?.username ?? "Not signed in"}</strong>
                     <p>Keep going! You&apos;re making a difference.</p>
                   </div>
                 </div>
 
                 <div className="leaderboard-profile-stat">
-                  <strong>6</strong>
+                  <strong>{myRank?.prCount ?? 0}</strong>
                   <span>PRs</span>
                 </div>
 
                 <div className="leaderboard-profile-stat">
-                  <strong>60</strong>
+                  <strong>{myRank?.totalScore ?? 0}</strong>
                   <span>Points</span>
                 </div>
               </div>

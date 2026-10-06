@@ -1,8 +1,10 @@
+"use client";
+import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getRepositories } from "@/lib/api";
 
-const repository = "https://github.com/Heromontage/hacktober-website";
 const steps = [
   { title: "Fork", text: "Fork the repo and clone it locally.", color: "sky" },
   { title: "Pick", text: "Claim an issue by commenting on it.", color: "salmon" },
@@ -17,6 +19,22 @@ const labels = [
 ];
 
 export default function About() {
+  const [repository, setRepository] = useState<string | null>(null);
+
+  useEffect(() => {
+    getRepositories()
+      .then((data) => {
+        const repo = data.repositories[0];
+
+        if (repo) {
+          setRepository(repo.url);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load repository:", error);
+      });
+  }, []);
+
   return (
     <div className="about-page">
       <Navbar />
@@ -51,7 +69,13 @@ export default function About() {
                 <p>The Hacktoberfest website for GDG IIT Mandi. Help build the home for our open source community.</p>
                 <div className="about-tags">{["TypeScript", "Next.js", "Tailwind"].map(tag => <span className="about-tag about-sky" key={tag}>{tag}</span>)}</div>
               </div>
-              <a className="about-action" href={repository} target="_blank" rel="noreferrer">Open on GitHub <ArrowUpRight size={15} aria-hidden="true" /></a>
+              <a
+                className="about-action"
+                href={repository ?? "#"}
+                target="_blank"
+                rel="noreferrer"
+                aria-disabled={!repository}
+              >Open on GitHub <ArrowUpRight size={15} aria-hidden="true" /></a>
             </article>
             <div className="about-pair">
               <article className="about-card">
@@ -80,7 +104,13 @@ export default function About() {
               <article className="about-card about-sky"><h2>NEED HELP?</h2><ul className="about-bullets"><li>Ask in the GDG IIT Mandi community chat</li><li>Tag a maintainer on your PR</li><li>Join the weekend help sessions</li></ul></article>
             </div>
             <div className="about-cta"><h2 className="about-section-title">READY TO HACK?</h2>
-              <a className="about-action about-start" href={`${repository}/issues`} target="_blank" rel="noreferrer">Start contributing <ArrowRight size={18} aria-hidden="true" /></a></div>
+              <a
+                className="about-action about-start"
+                href={repository ? `${repository}/issues` : "#"}
+                target="_blank"
+                rel="noreferrer"
+                aria-disabled={!repository}
+              >Start contributing <ArrowRight size={18} aria-hidden="true" /></a></div>
           </div>
         </section>
       </main>

@@ -1,11 +1,17 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 const links = ["About", "Rules", "Rewards","Leaderboard", "FAQ"];
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  const { user, authLoading } = useAuth();
+
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Main navigation">
@@ -35,7 +41,16 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <a className="button button-primary nav-join" href="#Footer">Join Now</a>
+          {authLoading ? null : user ? (
+            <span className="nav-user">{user.username}</span>
+          ) : (
+            <a
+              className="button button-primary nav-join"
+              href={`${API_URL}/auth/github`}
+            >
+              Join Now
+            </a>
+          )}
         </div>
       </nav>
     </header>

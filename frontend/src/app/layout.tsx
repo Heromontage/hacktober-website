@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat_Alternates } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,7 +37,11 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${montserratAlt.variable} ${minecraft.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
