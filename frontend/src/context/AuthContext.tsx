@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getCurrentUser } from "@/lib/api";
+import { getCurrentUser, logoutUser } from "@/lib/api";
 
 type User = {
   username: string;
@@ -20,6 +20,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   authLoading: boolean;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,8 +36,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .finally(() => setAuthLoading(false));
   }, []);
 
+  const logout = async () => {
+    await logoutUser();
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, authLoading }}>
+    <AuthContext.Provider value={{ user, authLoading, logout }}>
       {children}
     </AuthContext.Provider>
   );

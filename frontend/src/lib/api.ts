@@ -82,3 +82,9 @@ export type Repository = {
 export async function getRepositories() {
   return apiFetch<{ repositories: Repository[] }>("/repositories");
 }
+
+export async function logoutUser() {
+  return apiFetch<{ message: string }>("/auth/logout", {
+    method: "POST",
+  });
+}

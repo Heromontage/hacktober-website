@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 const links = ["About", "Rules", "Rewards","Leaderboard", "FAQ"];
@@ -10,7 +10,36 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function Navbar() {
   const pathname = usePathname();
 
-  const { user, authLoading } = useAuth();
+  const { user, authLoading, logout } = useAuth();
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  async function handleLogout() {
+    try {
+      await logout();
+      setDropdownOpen(false);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
 
   return (
     <header className="site-header">
@@ -42,7 +71,27 @@ export default function Navbar() {
             ))}
           </ul>
           {authLoading ? null : user ? (
-            <span className="nav-user">{user.username}</span>
+            <div className="nav-user-dropdown" ref={dropdownRef}>
+              <button
+                type="button"
+                className="nav-user"
+                onClick={() => {
+                  setDropdownOpen((open) => !open);
+                }}
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+              >
+                {user.username}
+              </button>
+
+              {dropdownOpen && (
+                <div className="nav-dropdown-menu">
+                  <button type="button" onClick={handleLogout}>
+                    Log out
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <a
               className="button button-primary nav-join"
