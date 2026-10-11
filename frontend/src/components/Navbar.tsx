@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
-const links = ["About", "Rules", "Rewards","Leaderboard", "FAQ"];
+const links = ["About", "Rules","Leaderboard"];
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Navbar() {
