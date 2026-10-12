@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/minecraft_55332682.module.css"],"sourcesContent":["@font-face {\n    \nfont-family: 'minecraft';\n    src: url('@vercel/turbopack-next/internal/font/local/font?{%22path%22:%22../fonts/Minecraft.woff2%22,%22preload%22:true,%22has_size_adjust%22:true}') format('woff2');\n    font-display: swap;\n    \n}\n\n@font-face {\n    font-family: 'minecraft Fallback';\n    src: local(\"Arial\");\n    ascent-override: 66.14%;\ndescent-override: 22.05%;\nline-gap-override: 7.92%;\nsize-adjust: 113.40%;\n\n}\n\n.className {\n    font-family: 'minecraft', 'minecraft Fallback';\n    \n}\n.variable {\n    --font-minecraft: 'minecraft', 'minecraft Fallback';\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;AAQA;;;;;;;;;AAUA;;;;AAIA"}}]
+}

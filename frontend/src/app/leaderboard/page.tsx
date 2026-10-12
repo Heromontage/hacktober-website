@@ -63,22 +63,22 @@ export default function Leaderboard() {
             <div className="leaderboard-decor leaderboard-decor-left">✦</div>
             <div className="leaderboard-decor leaderboard-decor-right">+</div>
 
-            <span className="leaderboard-tag">HACKTOBERFEST 26</span>
+            <span className="leaderboard-tag" data-scroll-reveal="pop">HACKTOBERFEST 26</span>
 
-            <h1 className="leaderboard-title">LEADERBOARD</h1>
+            <h1 className="leaderboard-title" data-scroll-reveal="pop">LEADERBOARD</h1>
 
-            <p className="leaderboard-subtitle">
+            <p className="leaderboard-subtitle" data-scroll-reveal="pop">
               WHO&apos;S MAKING THE MOST NOISE?
             </p>
 
-            <p className="leaderboard-lede">
+            <p className="leaderboard-lede" data-scroll-reveal="pop">
               Top contributors powering Hacktoberfest.
               <br />
               More PRs. A bigger impact.
             </p>
 
             <section className="leaderboard-card" aria-labelledby="top-contributors">
-              <div className="leaderboard-card-header">
+              <div className="leaderboard-card-header" data-scroll-reveal="pop">
                 <h2 id="top-contributors">
                   <span aria-hidden="true">♛</span>
                   TOP CONTRIBUTORS
@@ -91,7 +91,7 @@ export default function Leaderboard() {
               </div>
 
               <div className="leaderboard-table">
-                <div className="leaderboard-row leaderboard-header">
+                <div className="leaderboard-row leaderboard-header" data-scroll-reveal="pop">
                   <span>#</span>
                   <span>CONTRIBUTOR</span>
                   <span>PRs</span>
@@ -99,7 +99,7 @@ export default function Leaderboard() {
                 </div>
 
                 {loading && (
-                  <div className="leaderboard-row">
+                  <div className="leaderboard-row" data-scroll-reveal="pop">
                     <span />
                     <span>Loading...</span>
                     <span />
@@ -108,7 +108,7 @@ export default function Leaderboard() {
                 )}
 
                 {error && !loading && (
-                  <div className="leaderboard-row">
+                  <div className="leaderboard-row" data-scroll-reveal="pop">
                     <span />
                     <span>{error}</span>
                     <span />
@@ -130,6 +130,7 @@ export default function Leaderboard() {
                           : ""
                     }`}
                     key={contributor.username}
+                    data-scroll-reveal="pop"
                   >
                     <span
                       className={`leaderboard-rank ${
@@ -172,7 +173,8 @@ export default function Leaderboard() {
               </div>
             </section>
 
-            <section className="leaderboard-your-rank" aria-labelledby="your-rank">
+            {!loading && (
+            <section className="leaderboard-your-rank" aria-labelledby="your-rank" data-scroll-reveal="pop">
               <h2 id="your-rank">
                 <span aria-hidden="true">♟</span>
                 YOUR RANK
@@ -205,6 +207,7 @@ export default function Leaderboard() {
                 </div>
               </div>
             </section>
+            )}
 
             <div className="leaderboard-staircase" aria-hidden="true">
                 <div className="leaderboard-stair-group">
@@ -227,7 +230,7 @@ export default function Leaderboard() {
         </section>
       </main>
 
-      <Footer />
+      {!loading && <Footer />}
     </div>
   );
 }

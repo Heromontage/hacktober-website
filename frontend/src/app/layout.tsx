@@ -3,6 +3,7 @@ import { Inter, Montserrat_Alternates } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           {children}
+          <ScrollReveal />
         </AuthProvider>
       </body>
     </html>

@@ -1,0 +1,25 @@
+1:"$Sreact.fragment"
+2:I[55786,["/_next/static/chunks/22v4addlsn51p.js","/_next/static/chunks/11bl57_14bua9.js"],"default"]
+3:I[97367,["/_next/static/chunks/22v4addlsn51p.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/_next/static/chunks/22v4addlsn51p.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/22v4addlsn51p.js"],"MetadataBoundary"]
+a:I[27201,["/_next/static/chunks/22v4addlsn51p.js"],"IconMark"]
+c:I[39756,["/_next/static/chunks/22v4addlsn51p.js"],"default"]
+d:I[37457,["/_next/static/chunks/22v4addlsn51p.js"],"default"]
+10:I[32341,["/_next/static/chunks/22v4addlsn51p.js"],"AuthProvider"]
+11:I[93529,["/_next/static/chunks/22v4addlsn51p.js"],"default"]
+:HL["/_next/static/chunks/0pa6vgm9ut53e.css","style"]
+7:X
+f:X
+f:C
+0:{"buildId":"ucLWZwX37IvtzNw_VISPd","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/_next/static/chunks/11bl57_14bua9.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"About | Hacktoberfest 2026"}],["$","meta","1",{"name":"description","content":"Write code. Ship PRs. Join GDG IIT Mandi for a month of open source and learn how to contribute."}],["$","link","2",{"rel":"icon","href":"/favicon.ico?favicon.3qe44ge48vh-k.ico","sizes":"32x32","type":"image/x-icon"}],["$","$La","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@b","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@e","staleTime":"$7","varyParams":"$f"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/0pa6vgm9ut53e.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/22v4addlsn51p.js","async":true}]],["$","html",null,{"lang":"en","className":"inter_c15e96cb-module__0bjUvq__variable montserrat_alternates_b62afa0b-module__WdEQiG__variable minecraft_55332682-module__0yorCG__variable","children":["$","body",null,{"children":["$","$L10",null,{"children":[["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}],["$","$L11",null,{}]]}]}]}]]}],"isPartial":"$@12","staleTime":"$7","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@13","rootVaryParams":null,"needsRuntimeRequest":"$@14"}
+5:null
+7:300
+14:true
+7:C
+13:0
+b:"$undefined"
+e:"$undefined"
+12:"$undefined"
+6:"$undefined"

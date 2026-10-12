@@ -1,0 +1,14 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/about/page": [
+      "static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+      "static/media/9c25569e5bfeaac2-s.p.1q7c359k5hoju.woff2",
+      "static/media/a6fa2da6a1aa1b4a-s.p.3z2ms7nf6-j79.woff2",
+      "static/media/b66541dc5358997a-s.p.4599e2l3m1e_q.woff2",
+      "static/media/Minecraft-s.p.1w6ui0pcjuw8a.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

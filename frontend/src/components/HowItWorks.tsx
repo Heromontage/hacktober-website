@@ -23,13 +23,14 @@ export default function HowItWorks() {
   return (
     <section id="about" className="how-it-works">
       <div className="how-it-works-inner">
-        <h2>HOW IT WORKS</h2>
+        <h2 data-scroll-reveal="pop">HOW IT WORKS</h2>
 
         <div className="how-it-works-cards">
           {steps.map((step) => (
             <div
               key={step.number}
               className={`how-it-works-card ${step.className}`}
+              data-scroll-reveal="pop"
             >
               <span className="how-it-works-number">{step.number}</span>
               <h3>{step.title}</h3>
@@ -38,7 +39,7 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        <div className="how-it-works-cta">
+        <div className="how-it-works-cta" data-scroll-reveal="pop">
           <h2>READY TO HACK?</h2>
           <a href="#top" className="button button-primary">
             Join Hacktoberfest

@@ -565,7 +565,7 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 
 .about-repo-featured {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
   align-items: stretch;
   margin-top: 1.25rem;
@@ -1645,4 +1645,21 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
   flex: 0 0 auto;
   width: 100%;
   margin-top: auto;
+}
+/* Fade and gently pop in each content block as it enters the viewport. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal-pending {
+    opacity: 0;
+    scale: 0.96;
+  }
+
+  .scroll-reveal-visible {
+    animation: scroll-reveal-pop 580ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+  }
+
+  @keyframes scroll-reveal-pop {
+    0% { opacity: 0; scale: 0.96; }
+    70% { opacity: 1; scale: 1.012; }
+    100% { opacity: 1; scale: 1; }
+  }
 }

@@ -1,0 +1,25 @@
+/* [project]/src/app/minecraft_55332682.module.css [app-client] (css) */
+@font-face {
+  font-family: minecraft;
+  src: url("../media/Minecraft-s.p.1w6ui0pcjuw8a.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: minecraft Fallback;
+  src: local(Arial);
+  ascent-override: 66.14%;
+  descent-override: 22.05%;
+  line-gap-override: 7.92%;
+  size-adjust: 113.4%;
+}
+
+.minecraft_55332682-module__0yorCG__className {
+  font-family: minecraft, minecraft Fallback;
+}
+
+.minecraft_55332682-module__0yorCG__variable {
+  --font-minecraft: "minecraft", "minecraft Fallback";
+}
+
+/*# sourceMappingURL=src_app_minecraft_55332682_module_css_1igg3k2._.single.css.map*/

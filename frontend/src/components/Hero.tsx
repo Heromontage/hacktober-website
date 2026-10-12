@@ -18,10 +18,10 @@ export default function Hero() {
     <>
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-content">
-          <span className="year-badge"><span>26</span></span>
-          <h1 id="hero-title">HACKTOBER FEST</h1>
-          <p>Open source. Open minds. Ship your first pull request this October.</p>
-          <div className="hero-actions">
+          <span className="year-badge" data-scroll-reveal="pop"><span>26</span></span>
+          <h1 id="hero-title" data-scroll-reveal="pop">HACKTOBER FEST</h1>
+          <p data-scroll-reveal="pop">Open source. Open minds. Ship your first pull request this October.</p>
+          <div className="hero-actions" data-scroll-reveal="pop">
             <a className="button button-primary" href="/about">Start contributing</a>
             <a className="button button-outline" href="/rules">View rules</a>
           </div>
@@ -40,7 +40,7 @@ export default function Hero() {
       <section className="stats" id="about" aria-label="Hacktoberfest at a glance">
         <div className="stats-inner">
           {stats.map((stat) => (
-            <div className="stat" key={stat.label}>
+            <div className="stat" key={stat.label} data-scroll-reveal="pop">
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
             </div>

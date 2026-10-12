@@ -42,7 +42,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="site-header">
+    <header className="site-header" data-scroll-reveal="pop">
       <nav className="site-nav" aria-label="Main navigation">
         <Link className="wordmark" href="/" aria-label="Hacktoberfest home">HACKTOBERFEST</Link>
         <div className="nav-right">

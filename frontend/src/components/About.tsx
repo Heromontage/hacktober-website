@@ -30,8 +30,6 @@ const labels = [
 ];
 
 const descriptions: Record<string, string> = {
-  "hacktober-website":
-    "The Hacktoberfest website for GDG IIT Mandi. Help build the home for our open source community.",
   "META-X":
     "Explore reinforcement learning and automated data cleaning.",
   alpaca:
@@ -47,7 +45,6 @@ const descriptions: Record<string, string> = {
 };
 
 const techStacks: Record<string, string[]> = {
-  "hacktober-website": ["TypeScript", "Next.js", "Tailwind CSS"],
   "META-X": ["Python", "Reinforcement Learning", "Data Cleaning"],
   alpaca: ["Python", "AI/ML", "Quantitative Finance"],
   "ElderCare-Guardian": ["IoT", "Embedded Systems", "Healthcare AI"],
@@ -84,16 +81,10 @@ export default function About() {
       });
   }, []);
 
-  const websiteRepository = repositories.find(isWebsiteRepository);
-
   const projectRepositories = repositories.filter(
     (repo) =>
       repo.githubOwner === GITHUB_OWNER &&
       !isWebsiteRepository(repo)
-  );
-
-  const metaXRepository = projectRepositories.find(
-    (repo) => repo.githubRepo === "META-X"
   );
 
   const renderTechTags = (repoName: string) => (
@@ -107,7 +98,7 @@ export default function About() {
   );
 
   const renderIssueLabels = () => (
-    <article className="about-card about-issue-card">
+    <article className="about-card about-issue-card" data-scroll-reveal="pop">
       <h3>ISSUE LABELS</h3>
       <ul className="about-labels">
         {labels.map((label) => (
@@ -129,23 +120,23 @@ export default function About() {
       <main>
         <section className="about-intro" aria-labelledby="about-title">
           <div className="about-inner">
-            <span className="about-tag about-sky">ABOUT THE EVENT</span>
-            <span className="about-date">OCT 1 – 31</span>
+            <span className="about-tag about-sky" data-scroll-reveal="pop">ABOUT THE EVENT</span>
+            <span className="about-date" data-scroll-reveal="pop">OCT 1 – 31</span>
 
-            <h1 id="about-title" className="about-title">
+            <h1 id="about-title" className="about-title" data-scroll-reveal="pop">
               WRITE CODE.
               <br />
               <span>SHIP PRS.</span>
             </h1>
 
-            <p className="about-lede">
+            <p className="about-lede" data-scroll-reveal="pop">
               Hacktoberfest 26 is a month-long celebration of open source. At
               IIT Mandi, it is hosted by Google Developer Groups, and every
               merged pull request counts.
             </p>
 
             <div className="about-pair">
-              <article className="about-card about-sky">
+              <article className="about-card about-sky" data-scroll-reveal="pop">
                 <h2>WHAT IS IT?</h2>
                 <p>
                   An open source festival where you make quality contributions
@@ -154,7 +145,7 @@ export default function About() {
                 </p>
               </article>
 
-              <article className="about-card about-amber">
+              <article className="about-card about-amber" data-scroll-reveal="pop">
                 <h2>WHO IS ORGANIZING?</h2>
                 <p>
                   <strong>Google Developer Groups, IIT Mandi</strong>, a
@@ -175,8 +166,8 @@ export default function About() {
 
         <section className="about-repo" aria-labelledby="repo-title">
           <div className="about-inner">
-            <span className="about-tag about-salmon">THE REPO</span>
-            <h2 className="about-section-title" id="repo-title">
+            <span className="about-tag about-salmon" data-scroll-reveal="pop">THE REPO</span>
+            <h2 className="about-section-title" id="repo-title" data-scroll-reveal="pop">
               KNOW BEFORE YOU FORK
             </h2>
 
@@ -188,6 +179,7 @@ export default function About() {
                   {projectRepositories.map((repo) => (
                     <article
                       className="about-card about-repository"
+                      data-scroll-reveal="pop"
                       key={repo._id}
                     >
                       <div className="about-repository-content">
@@ -219,37 +211,14 @@ export default function About() {
                 </div>
 
                 <div className="about-repo-featured">
-                  <article className="about-card about-repository">
-                    <div className="about-repository-content">
-                      <h3>
-                        {websiteRepository
-                          ? `${websiteRepository.githubOwner} / ${websiteRepository.githubRepo}`
-                          : `${WEBSITE_OWNER} / ${WEBSITE_REPO}`}
-                      </h3>
-                      <p>{descriptions[WEBSITE_REPO]}</p>
-                      {renderTechTags(WEBSITE_REPO)}
-                    </div>
-
-                    <a
-                      className="about-action"
-                      href={
-                        websiteRepository?.url ??
-                        "https://github.com/Heromontage/hacktober-website"
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Open on GitHub{" "}
-                      <ArrowUpRight size={15} aria-hidden="true" />
-                    </a>
-                  </article>
-
                   {renderIssueLabels()}
                 </div>
               </>
             )}
 
-            <h3 className="about-steps-title" id="contribute">
+            {!repositoriesLoading && (
+              <>
+            <h3 className="about-steps-title" id="contribute" data-scroll-reveal="pop">
               HOW TO CONTRIBUTE
             </h3>
 
@@ -258,6 +227,7 @@ export default function About() {
                 <li
                   className={`about-card about-${step.color}`}
                   key={step.title}
+                  data-scroll-reveal="pop"
                 >
                   <span className="about-number">0{index + 1}</span>
                   <h4>{step.title}</h4>
@@ -265,16 +235,19 @@ export default function About() {
                 </li>
               ))}
             </ol>
+              </>
+            )}
           </div>
         </section>
 
+        {!repositoriesLoading && (
         <section
           className="about-support"
           aria-label="Contribution guidance"
         >
           <div className="about-inner">
             <div className="about-pair">
-              <article className="about-card about-salmon" id="rules">
+              <article className="about-card about-salmon" id="rules" data-scroll-reveal="pop">
                 <h2>GROUND RULES</h2>
                 <ul className="about-bullets">
                   <li>One issue, one PR</li>
@@ -286,7 +259,7 @@ export default function About() {
                 </ul>
               </article>
 
-              <article className="about-card about-sky">
+              <article className="about-card about-sky" data-scroll-reveal="pop">
                 <h2>NEED HELP?</h2>
                 <ul className="about-bullets">
                   <li>Ask in the GDG IIT Mandi community chat</li>
@@ -296,14 +269,13 @@ export default function About() {
               </article>
             </div>
 
-            <div className="about-cta">
+            <div className="about-cta" data-scroll-reveal="pop">
               <h2 className="about-section-title">READY TO HACK?</h2>
               <a
                 className="about-action about-start"
-                href={metaXRepository ? `${metaXRepository.url}/issues` : "#"}
+                href="https://github.com/Google-Developers-Group-IIT-MANDI"
                 target="_blank"
                 rel="noreferrer"
-                aria-disabled={!metaXRepository}
               >
                 Start contributing{" "}
                 <ArrowRight size={18} aria-hidden="true" />
@@ -311,9 +283,10 @@ export default function About() {
             </div>
           </div>
         </section>
+        )}
       </main>
 
-      <Footer />
+      {!repositoriesLoading && <Footer />}
     </div>
   );
 }
