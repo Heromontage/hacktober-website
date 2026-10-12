@@ -59,25 +59,91 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
   .button-primary:hover { background: #ffd065; }
 }
 
+.nav-join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  color: var(--forest-deep);
+  background: var(--amber);
+  border: 2px solid var(--maroon);
+  box-shadow: 4px 4px 0 var(--maroon);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease,
+    background-color 180ms ease;
+}
 
-.nav-join { min-width: 216px; min-height: 64px; }
+@media (hover: hover) and (pointer: fine) {
+  .nav-join:hover {
+    color: var(--forest-deep);
+    background: #ffd065;
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0 var(--maroon);
+  }
+}
+
+.nav-join:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-join {
+    transition: none;
+  }
+}
+
 
 .nav-user {
-  color: var(--cream);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 220px;
+  padding: 10px 14px;
+  color: var(--forest-deep);
+  background: var(--amber);
+  border: 2px solid var(--maroon);
+  box-shadow: 4px 4px 0 var(--maroon);
+  border-radius: 6px;
+  font-family: inherit;
   font-size: 18px;
   font-weight: 600;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease,
+    background-color 180ms ease;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-user:hover {
+    background: #ffd065;
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0 var(--maroon);
+  }
+}
+
+.nav-user:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-user {
+    transition: none;
+  }
+}
+
 
 .nav-user-dropdown {
   position: relative;
-}
-
-.nav-user {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
 }
 
 .nav-dropdown-menu {
@@ -618,11 +684,17 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 .rules-cta:active { transform: scale(.97); }
 
 .leaderboard-page {
+  position: relative;
+  isolation: isolate;
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
   background: var(--forest-deep);
-  color: var(--cream);
+}
+
+.leaderboard-page > .page-waves {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .leaderboard-page main {
@@ -1102,3 +1174,475 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
     display: none;
   }
 @media (max-width: 380px) { .rules-title { font-size: 26px; letter-spacing: 2px; } .rules-stamp { max-width: 130px; text-align: center; } .rules-list-item { padding: 10px; } }
+
+
+/* ========================================
+   CONSISTENT SITE-WIDE CARD HOVER EFFECTS
+   ======================================== */
+
+.how-it-works-card,
+.about-card,
+.about-repository-grid .about-repository,
+.about-repo-featured > *,
+.rules-golden,
+.rules-dos,
+.rules-list-item,
+.rules-consequence,
+.leaderboard-card,
+.leaderboard-rank-card {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+/* Only apply hover effects on devices with a real pointer */
+@media (hover: hover) and (pointer: fine) {
+  .how-it-works-card:hover,
+  .about-card:hover,
+  .about-repository-grid .about-repository:hover,
+  .about-repo-featured > *:hover,
+  .rules-golden:hover,
+  .rules-dos:hover,
+  .rules-list-item:hover,
+  .rules-consequence:hover,
+  .leaderboard-card:hover,
+  .leaderboard-rank-card:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.035)
+      drop-shadow(2px 3px 0 rgb(40 71 63 / 12%));
+  }
+
+  /* Make leaderboard entries respond independently */
+  .leaderboard-row:not(.leaderboard-header):hover {
+    background-color: rgb(62 95 88 / 12%);
+    transition: background-color 180ms ease;
+  }
+}
+
+/* Keyboard users get a visible focus indicator */
+.how-it-works-card:focus-visible,
+.about-card:focus-visible,
+.rules-golden:focus-visible,
+.rules-dos:focus-visible,
+.rules-list-item:focus-visible,
+.rules-consequence:focus-visible,
+.leaderboard-card:focus-visible,
+.leaderboard-rank-card:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .how-it-works-card,
+  .about-card,
+  .about-repository-grid .about-repository,
+  .about-repo-featured > *,
+  .rules-golden,
+  .rules-dos,
+  .rules-list-item,
+  .rules-consequence,
+  .leaderboard-card,
+  .leaderboard-rank-card,
+  .leaderboard-row:not(.leaderboard-header) {
+    transition: none;
+  }
+
+  .how-it-works-card:hover,
+  .about-card:hover,
+  .about-repository-grid .about-repository:hover,
+  .about-repo-featured > *:hover,
+  .rules-golden:hover,
+  .rules-dos:hover,
+  .rules-list-item:hover,
+  .rules-consequence:hover,
+  .leaderboard-card:hover,
+  .leaderboard-rank-card:hover {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Mobile navbar */
+@media (max-width: 600px) {
+  .site-nav {
+    height: auto;
+    min-height: 0;
+    padding: 16px 18px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  /* Brand and username share the top row */
+  .site-nav > .wordmark {
+    align-self: flex-start;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+  }
+
+  .nav-right {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .nav-user-dropdown {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    max-width: 55%;
+  }
+
+  .nav-user {
+    max-width: 100%;
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  /* Keep navigation links together on the second row */
+  .nav-links {
+    order: 1;
+    display: flex;
+    flex: 1 1 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .nav-links li {
+    min-width: 0;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .nav-join {
+    min-width: 0;
+    min-height: 36px;
+    padding: 7px 10px;
+    font-size: 13px;
+    border-width: 2px;
+    box-shadow: 3px 3px 0 var(--maroon);
+  }
+
+  .nav-dropdown-menu {
+    z-index: 20;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 360px) {
+  .site-nav {
+    padding-inline: 14px;
+  }
+
+  .site-nav > .wordmark {
+    font-size: 14px;
+  }
+
+  .nav-user-dropdown {
+    right: 14px;
+    max-width: 52%;
+  }
+
+  .nav-user {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+}
+
+/* Leaderboard: mobile layout */
+@media (max-width: 600px) {
+  .leaderboard-page {
+    overflow-x: clip;
+  }
+
+  .leaderboard-hero {
+    padding: 30px 16px 24px;
+  }
+
+  .leaderboard-inner {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .leaderboard-decor {
+    display: none;
+  }
+
+  .leaderboard-tag {
+    font-size: 12px;
+  }
+
+  .leaderboard-title {
+    margin: 10px 0 0;
+    font-size: clamp(30px, 9vw, 42px);
+    line-height: 1.15;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .leaderboard-subtitle {
+    margin: 18px 0 8px;
+    font-size: clamp(13px, 3.6vw, 17px);
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+
+  .leaderboard-lede {
+    margin: 0 auto 28px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .leaderboard-card {
+    width: 100%;
+    box-shadow: 5px 5px 0 var(--maroon);
+  }
+
+  .leaderboard-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 12px;
+  }
+
+  .leaderboard-card-header h2,
+  .leaderboard-your-rank h2 {
+    font-size: 16px;
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+
+  .leaderboard-card-header h2 span,
+  .leaderboard-your-rank h2 span {
+    margin-right: 6px;
+  }
+
+  .leaderboard-live {
+    font-size: 11px;
+  }
+
+  .leaderboard-table {
+    padding: 0 8px 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 28px minmax(0, 1fr) 36px 48px;
+    gap: 5px;
+    min-height: 48px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+
+  .leaderboard-header {
+    min-height: 42px;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .leaderboard-user {
+    min-width: 0;
+    gap: 7px;
+  }
+
+  .leaderboard-user strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 11px;
+  }
+
+  .leaderboard-avatar {
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .leaderboard-rank-badge {
+    width: 26px;
+    height: 28px;
+  }
+
+  .leaderboard-your-rank {
+    width: 100%;
+    margin: 42px auto 0;
+  }
+
+  .leaderboard-your-rank h2 {
+    margin-bottom: 14px;
+  }
+
+  .leaderboard-rank-card {
+    grid-template-columns: 56px minmax(0, 1fr) 44px 52px;
+    box-shadow: 5px 5px 0 var(--maroon);
+  }
+
+  .leaderboard-big-rank {
+    padding: 12px 2px;
+    font-size: 22px;
+    overflow-wrap: anywhere;
+  }
+
+  .leaderboard-profile {
+    min-width: 0;
+    min-height: 80px;
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .leaderboard-avatar-profile {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .leaderboard-profile strong {
+    display: block;
+    overflow-wrap: anywhere;
+    font-size: 11px;
+  }
+
+  .leaderboard-profile p {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .leaderboard-profile-stat {
+    min-width: 0;
+    min-height: 50px;
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .leaderboard-profile-stat strong {
+    font-size: 15px;
+  }
+
+  .leaderboard-staircase {
+    height: 72px;
+    margin-top: 36px;
+    overflow: hidden;
+  }
+
+  .leaderboard-stair {
+    width: clamp(20px, 8vw, 36px);
+  }
+
+  .leaderboard-stair-amber { height: 20px; }
+  .leaderboard-stair-salmon { height: 28px; }
+  .leaderboard-stair-sky { height: 36px; }
+  .leaderboard-stair-cream { height: 44px; }
+  .leaderboard-stair-maroon { height: 52px; }
+}
+
+@media (max-width: 360px) {
+  .leaderboard-hero {
+    padding-inline: 12px;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 22px minmax(0, 1fr) 28px 40px;
+    gap: 3px;
+    padding-inline: 4px;
+    font-size: 11px;
+  }
+
+  .leaderboard-header {
+    font-size: 9px;
+  }
+
+  .leaderboard-user strong {
+    font-size: 10px;
+  }
+
+  .leaderboard-rank-card {
+    grid-template-columns: 44px minmax(0, 1fr) 36px 42px;
+  }
+
+  .leaderboard-profile {
+    padding: 6px;
+  }
+}
+
+/* Fix wave layering on the leaderboard */
+.leaderboard-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  background: #28473f;
+}
+
+.leaderboard-page > .page-waves {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.leaderboard-page > .page-waves > * {
+  width: 100%;
+  height: 100%;
+}
+
+.leaderboard-page > .site-header,
+.leaderboard-page > main,
+.leaderboard-page > .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.leaderboard-page .leaderboard-hero {
+  background: transparent;
+}
+
+/* Remove home-page staircase decorations from the leaderboard */
+.leaderboard-page .leaderboard-staircase,
+.leaderboard-page .staircase,
+.leaderboard-page .leaderboard-decoration {
+  display: none !important;
+}
+
+/* Keep the leaderboard footer at the bottom */
+.leaderboard-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.leaderboard-page > .site-header {
+  flex: 0 0 auto;
+}
+
+.leaderboard-page > main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.leaderboard-page > .site-footer {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-top: auto;
+}

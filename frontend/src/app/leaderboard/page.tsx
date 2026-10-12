@@ -8,6 +8,7 @@ import {
   getMyRank,
   type LeaderboardUser,
 } from "@/lib/api";
+import GradientWaves from "@/components/GradientWaves";
 
 export default function Leaderboard() {
   const [contributors, setContributors] = useState<LeaderboardUser[]>([]);
@@ -34,8 +35,28 @@ export default function Leaderboard() {
 
   return (
     <div className="leaderboard-page">
+      <div className="page-waves" aria-hidden="true">
+        <GradientWaves
+          horizonColor="#1C3A33"
+          waveColor="#4E846D"
+          crestColor="#AAD8B6"
+          speed={0.3}
+          amplitude={2.5}
+          waveScale={0.6}
+          swell={35}
+          turbulence={20}
+          detail="medium"
+          fogDepth={38}
+          brightness={0.75}
+          opacity={0.65}
+          mouseInteraction={true}
+          parallaxStrength={0.25}
+          grain={false}
+        />
+      </div>
+      
       <Navbar />
-
+      
       <main>
         <section className="leaderboard-hero">
           <div className="leaderboard-inner">
