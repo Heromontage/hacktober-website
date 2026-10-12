@@ -461,6 +461,69 @@ main { position: relative; z-index: 1; flex: 1; min-height: 0; display: flex; fl
 .about-cta h2 { color: var(--forest); margin: 12px 0 14px; }
 .about-start { padding: 10px 20px; font-size: 14px; box-shadow: 6px 6px 0 var(--maroon); }
 
+
+/* Repository cards */
+.about-repository-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.about-repository {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.about-repository-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-repository h3 {
+  overflow-wrap: anywhere;
+}
+
+.about-repository p {
+  max-width: 450px;
+}
+
+.about-repository .about-action {
+  flex-shrink: 0;
+}
+
+.about-repo-featured {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+  margin-top: 1.25rem;
+}
+
+.about-issue-card {
+  min-width: 0;
+}
+
+@media (max-width: 700px) {
+  .about-repository-grid,
+  .about-repo-featured {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-repository {
+    flex-direction: column;
+  }
+
+  .about-repository .about-action {
+    align-self: flex-start;
+  }
+}
+
 @media (min-width: 1000px) { .about-intro, .about-repo, .about-support { padding: 40px 32px; } .about-title { font-size: 48px; } .about-lede { max-width: 650px; font-size: 17px; } .about-card { padding: 24px; } .about-card p, .about-bullets { font-size: 15px; } .about-steps p { font-size: 14px; } }
 @media (max-width: 600px) { .about-intro, .about-repo, .about-support { padding: 24px 20px; } .about-pair { grid-template-columns: 1fr; gap: 20px; } .about-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .about-repository { flex-direction: column; gap: 14px; } .about-title { font-size: 30px; letter-spacing: 3px; margin-top: 26px; } .about-date { right: 0; top: -8px; font-size: 10px; } .about-section-title { font-size: 20px; letter-spacing: 2px; }  }
 

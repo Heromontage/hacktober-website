@@ -1,9 +1,19 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getRepositories } from "@/lib/api";
+
+type AboutRepository = {
+  _id: string;
+  githubOwner: string;
+  githubRepo: string;
+  githubRepoId: number;
+  url: string;
+  isActive: boolean;
+};
 
 const steps = [
   { title: "Fork", text: "Fork the repo and clone it locally.", color: "sky" },
@@ -11,6 +21,7 @@ const steps = [
   { title: "Build", text: "Make a branch, commit, and push.", color: "amber" },
   { title: "PR", text: "Open a pull request and get reviewed.", color: "cream" },
 ];
+
 const labels = [
   { name: "good first issue", text: "start here", color: "sky" },
   { name: "help wanted", text: "medium effort", color: "amber" },
@@ -18,42 +29,145 @@ const labels = [
   { name: "docs", text: "no code needed", color: "cream" },
 ];
 
+const descriptions: Record<string, string> = {
+  "hacktober-website":
+    "The Hacktoberfest website for GDG IIT Mandi. Help build the home for our open source community.",
+  "META-X":
+    "Explore reinforcement learning and automated data cleaning.",
+  alpaca:
+    "Build AI-powered options trading and risk management tools.",
+  "ElderCare-Guardian":
+    "Work on wearable healthcare monitoring and fall detection.",
+  GEOLEDGER:
+    "Explore blockchain donations and Soroban smart contracts.",
+  Brain:
+    "Build knowledge graphs and AI-powered codebase intelligence.",
+  "LLM-ATLAS":
+    "Explore LLM architecture visualizations and model comparisons.",
+};
+
+const techStacks: Record<string, string[]> = {
+  "hacktober-website": ["TypeScript", "Next.js", "Tailwind CSS"],
+  "META-X": ["Python", "Reinforcement Learning", "Data Cleaning"],
+  alpaca: ["Python", "AI/ML", "Quantitative Finance"],
+  "ElderCare-Guardian": ["IoT", "Embedded Systems", "Healthcare AI"],
+  GEOLEDGER: ["Blockchain", "Soroban", "Web3"],
+  Brain: ["Python", "Knowledge Graphs", "AI"],
+  "LLM-ATLAS": ["LLMs", "Generative AI", "Visualization"],
+};
+
+const WEBSITE_OWNER = "Heromontage";
+const WEBSITE_REPO = "hacktober-website";
+const GITHUB_OWNER = "Google-Developers-Group-IIT-MANDI";
+
+function isWebsiteRepository(repo: AboutRepository) {
+  return (
+    repo.githubOwner === WEBSITE_OWNER &&
+    repo.githubRepo === WEBSITE_REPO
+  );
+}
+
 export default function About() {
-  const [repository, setRepository] = useState<string | null>(null);
+  const [repositories, setRepositories] = useState<AboutRepository[]>([]);
+  const [repositoriesLoading, setRepositoriesLoading] = useState(true);
 
   useEffect(() => {
     getRepositories()
-      .then((data) => {
-        const repo = data.repositories[0];
-
-        if (repo) {
-          setRepository(repo.url);
-        }
+      .then(({ repositories }) => {
+        setRepositories(repositories.filter((repo) => repo.isActive));
       })
       .catch((error) => {
-        console.error("Failed to load repository:", error);
+        console.error("Failed to load repositories:", error);
+      })
+      .finally(() => {
+        setRepositoriesLoading(false);
       });
   }, []);
+
+  const websiteRepository = repositories.find(isWebsiteRepository);
+
+  const projectRepositories = repositories.filter(
+    (repo) =>
+      repo.githubOwner === GITHUB_OWNER &&
+      !isWebsiteRepository(repo)
+  );
+
+  const metaXRepository = projectRepositories.find(
+    (repo) => repo.githubRepo === "META-X"
+  );
+
+  const renderTechTags = (repoName: string) => (
+    <div className="about-tags">
+      {(techStacks[repoName] ?? ["Open Source"]).map((tag) => (
+        <span className="about-tag about-sky" key={tag}>
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+
+  const renderIssueLabels = () => (
+    <article className="about-card about-issue-card">
+      <h3>ISSUE LABELS</h3>
+      <ul className="about-labels">
+        {labels.map((label) => (
+          <li key={label.name}>
+            <span className={`about-tag about-${label.color}`}>
+              {label.name}
+            </span>{" "}
+            <span>{label.text}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
 
   return (
     <div className="about-page">
       <Navbar />
+
       <main>
         <section className="about-intro" aria-labelledby="about-title">
           <div className="about-inner">
             <span className="about-tag about-sky">ABOUT THE EVENT</span>
             <span className="about-date">OCT 1 – 31</span>
-            <h1 id="about-title" className="about-title">WRITE CODE.<br /><span>SHIP PRS.</span></h1>
-            <p className="about-lede">Hacktoberfest 26 is a month-long celebration of open source. At IIT Mandi, it is hosted by Google Developer Groups, and every merged pull request counts.</p>
+
+            <h1 id="about-title" className="about-title">
+              WRITE CODE.
+              <br />
+              <span>SHIP PRS.</span>
+            </h1>
+
+            <p className="about-lede">
+              Hacktoberfest 26 is a month-long celebration of open source. At
+              IIT Mandi, it is hosted by Google Developer Groups, and every
+              merged pull request counts.
+            </p>
+
             <div className="about-pair">
               <article className="about-card about-sky">
                 <h2>WHAT IS IT?</h2>
-                <p>An open source festival where you make quality contributions to real projects. Fix a bug, improve docs, add a feature, and learn how teams build software together.</p>
+                <p>
+                  An open source festival where you make quality contributions
+                  to real projects. Fix a bug, improve docs, add a feature, and
+                  learn how teams build software together.
+                </p>
               </article>
+
               <article className="about-card about-amber">
                 <h2>WHO IS ORGANIZING?</h2>
-                <p><strong>Google Developer Groups, IIT Mandi</strong>, a student-run community for developers, designers, and curious builders on campus.</p>
-                <div className="about-tags">{["Workshops", "Mentoring", "Reviews"].map(tag => <span className="about-tag" key={tag}>{tag}</span>)}</div>
+                <p>
+                  <strong>Google Developer Groups, IIT Mandi</strong>, a
+                  student-run community for developers, designers, and curious
+                  builders on campus.
+                </p>
+                <div className="about-tags">
+                  {["Workshops", "Mentoring", "Reviews"].map((tag) => (
+                    <span className="about-tag" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </article>
             </div>
           </div>
@@ -62,58 +176,143 @@ export default function About() {
         <section className="about-repo" aria-labelledby="repo-title">
           <div className="about-inner">
             <span className="about-tag about-salmon">THE REPO</span>
-            <h2 className="about-section-title" id="repo-title">KNOW BEFORE YOU FORK</h2>
-            <article className="about-card about-repository">
-              <div>
-                <h3>GDG-IITMANDI / HACKTOBERFEST-26</h3>
-                <p>The Hacktoberfest website for GDG IIT Mandi. Help build the home for our open source community.</p>
-                <div className="about-tags">{["TypeScript", "Next.js", "Tailwind"].map(tag => <span className="about-tag about-sky" key={tag}>{tag}</span>)}</div>
-              </div>
-              <a
-                className="about-action"
-                href={repository ?? "#"}
-                target="_blank"
-                rel="noreferrer"
-                aria-disabled={!repository}
-              >Open on GitHub <ArrowUpRight size={15} aria-hidden="true" /></a>
-            </article>
-            <div className="about-pair">
-              <article className="about-card">
-                <h3>REPO MAP</h3>
-                <pre className="about-tree">{`├─ src/
-│  ├─ app/        pages
-│  ├─ components/ UI
-│  └─ fonts/      typography
-├─ public/       assets
-└─ README.md`}</pre>
-              </article>
-              <article className="about-card">
-                <h3>ISSUE LABELS</h3>
-                <ul className="about-labels">{labels.map(label => <li key={label.name}><span className={`about-tag about-${label.color}`}>{label.name}</span> <span>{label.text}</span></li>)}</ul>
-              </article>
-            </div>
-            <h3 className="about-steps-title" id="contribute">HOW TO CONTRIBUTE</h3>
-            <ol className="about-steps">{steps.map((step, index) => <li className={`about-card about-${step.color}`} key={step.title}><span className="about-number">0{index + 1}</span><h4>{step.title}</h4><p>{step.text}</p></li>)}</ol>
+            <h2 className="about-section-title" id="repo-title">
+              KNOW BEFORE YOU FORK
+            </h2>
+
+            {repositoriesLoading ? (
+              <p>Loading repositories...</p>
+            ) : (
+              <>
+                <div className="about-repository-grid">
+                  {projectRepositories.map((repo) => (
+                    <article
+                      className="about-card about-repository"
+                      key={repo._id}
+                    >
+                      <div className="about-repository-content">
+                        <h3>
+                          {repo.githubOwner} / {repo.githubRepo}
+                        </h3>
+                        <p>
+                          {descriptions[repo.githubRepo] ??
+                            "Explore this open-source project and contribute to its development."}
+                        </p>
+                        {renderTechTags(repo.githubRepo)}
+                      </div>
+
+                      <a
+                        className="about-action"
+                        href={repo.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Open on GitHub{" "}
+                        <ArrowUpRight size={15} aria-hidden="true" />
+                      </a>
+                    </article>
+                  ))}
+
+                  {!projectRepositories.length && (
+                    <p>No project repositories are available right now.</p>
+                  )}
+                </div>
+
+                <div className="about-repo-featured">
+                  <article className="about-card about-repository">
+                    <div className="about-repository-content">
+                      <h3>
+                        {websiteRepository
+                          ? `${websiteRepository.githubOwner} / ${websiteRepository.githubRepo}`
+                          : `${WEBSITE_OWNER} / ${WEBSITE_REPO}`}
+                      </h3>
+                      <p>{descriptions[WEBSITE_REPO]}</p>
+                      {renderTechTags(WEBSITE_REPO)}
+                    </div>
+
+                    <a
+                      className="about-action"
+                      href={
+                        websiteRepository?.url ??
+                        "https://github.com/Heromontage/hacktober-website"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open on GitHub{" "}
+                      <ArrowUpRight size={15} aria-hidden="true" />
+                    </a>
+                  </article>
+
+                  {renderIssueLabels()}
+                </div>
+              </>
+            )}
+
+            <h3 className="about-steps-title" id="contribute">
+              HOW TO CONTRIBUTE
+            </h3>
+
+            <ol className="about-steps">
+              {steps.map((step, index) => (
+                <li
+                  className={`about-card about-${step.color}`}
+                  key={step.title}
+                >
+                  <span className="about-number">0{index + 1}</span>
+                  <h4>{step.title}</h4>
+                  <p>{step.text}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
-        <section className="about-support" aria-label="Contribution guidance">
+        <section
+          className="about-support"
+          aria-label="Contribution guidance"
+        >
           <div className="about-inner">
             <div className="about-pair">
-              <article className="about-card about-salmon" id="rules"><h2>GROUND RULES</h2><ul className="about-bullets"><li>One issue, one PR</li><li>Be kind in reviews</li><li>No spam or empty PRs</li><li>Follow the repository’s contribution guidelines</li></ul></article>
-              <article className="about-card about-sky"><h2>NEED HELP?</h2><ul className="about-bullets"><li>Ask in the GDG IIT Mandi community chat</li><li>Tag a maintainer on your PR</li><li>Join the weekend help sessions</li></ul></article>
+              <article className="about-card about-salmon" id="rules">
+                <h2>GROUND RULES</h2>
+                <ul className="about-bullets">
+                  <li>One issue, one PR</li>
+                  <li>Be kind in reviews</li>
+                  <li>No spam or empty PRs</li>
+                  <li>
+                    Follow the repository’s contribution guidelines
+                  </li>
+                </ul>
+              </article>
+
+              <article className="about-card about-sky">
+                <h2>NEED HELP?</h2>
+                <ul className="about-bullets">
+                  <li>Ask in the GDG IIT Mandi community chat</li>
+                  <li>Tag a maintainer on your PR</li>
+                  <li>Join the weekend help sessions</li>
+                </ul>
+              </article>
             </div>
-            <div className="about-cta"><h2 className="about-section-title">READY TO HACK?</h2>
+
+            <div className="about-cta">
+              <h2 className="about-section-title">READY TO HACK?</h2>
               <a
                 className="about-action about-start"
-                href={repository ? `${repository}/issues` : "#"}
+                href={metaXRepository ? `${metaXRepository.url}/issues` : "#"}
                 target="_blank"
                 rel="noreferrer"
-                aria-disabled={!repository}
-              >Start contributing <ArrowRight size={18} aria-hidden="true" /></a></div>
+                aria-disabled={!metaXRepository}
+              >
+                Start contributing{" "}
+                <ArrowRight size={18} aria-hidden="true" />
+              </a>
+            </div>
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );
